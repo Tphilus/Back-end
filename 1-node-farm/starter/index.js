@@ -7,6 +7,9 @@ const slugify = require("slugify");
 
 const replaceTemplate = require("./modules/replaceTemplate");
 
+const textIn2 = fs.readFileSync("./txt/input.txt", "utf-8");
+console.log(textIn2);
+
 // BLOCKING, SYNCHRONOUS WAY
 // const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
 // console.log(textIn);
