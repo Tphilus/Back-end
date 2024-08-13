@@ -17,7 +17,7 @@ setTimeout(() => console.log("Immediate 1 finished"))
 process.nextTick(() => console.log('Process.nextTick'))
 
 crypto.pbkdf2('password', 'salt', 100000, 1024, 'sha512', () => {
-    console.log();
+    console.log(Date.now() - start, "Password encrypted");
 })
 })
 
