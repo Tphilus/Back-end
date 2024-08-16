@@ -26,6 +26,8 @@ app.get('/api/v1/tours', (req, res) => {
     })
 })
 
+app.post('/app/vi/tours')
+
 const port = 3000;
 app.listen(port, () => {
     console.log(`App runing on port ${port}...`);
