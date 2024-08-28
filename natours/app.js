@@ -8,7 +8,8 @@ const app = express();
 
 // 1) Middleware
 app.use(morgan('dev'));
-app.use(express.json()); // Midleware
+app.use(express.json()); // Middleware
+app.use(express.static(`${__dirname}/public`))
 
 app.use((req, res, next) => {
   console.log('Hello from the middleware');
@@ -23,7 +24,6 @@ app.use((req, res, next) => {
 
 
 // 3) ROUTE
-
   app.use('/api/v1/tours', tourRouter)
   app.use('/api/v1/users', userRouter)
 
