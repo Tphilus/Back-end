@@ -1,7 +1,6 @@
-const parse = require("csv-parse");
 const fs = require("fs");
-const path = require()
-
+const path = require("path");
+const { parse } = require("csv-parse");  // Correct import syntax for csv-parse
 const habitablePlanets = [];
 
 function isHabitablePlanet(planet) {
@@ -13,9 +12,9 @@ function isHabitablePlanet(planet) {
   );
 }
 
-function loadPlantsData() {
+function loadPlanetsData() {
   return new Promise((resolve, reject) => {
-    fs.createReadStream("kepler_data.csv")
+    fs.createReadStream(path.join(__dirname, '..', '..', 'data', "kepler_data.csv"))
       .pipe(
         parse({
           comment: "#",
@@ -28,7 +27,7 @@ function loadPlantsData() {
         }
       })
       .on("error", (err) => {
-        console.log(err);
+        console.error("Error reading CSV file:", err);
         reject(err);
       })
       .on("end", () => {
@@ -39,6 +38,6 @@ function loadPlantsData() {
 }
 
 module.exports = {
-  loadPlantsData,
+  loadPlanetsData,
   planets: habitablePlanets,
 };
