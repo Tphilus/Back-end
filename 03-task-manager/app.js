@@ -7,6 +7,7 @@ require('dotenv').config() // Router from the .env
 //middleware
 app.use(express.json());
 
+
 //routes
 app.get("/api/v1/", (req, res) => {
   res.send("Task Manager App");
