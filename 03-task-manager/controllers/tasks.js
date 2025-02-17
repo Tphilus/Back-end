@@ -21,8 +21,8 @@ const getTask = asyncWrapper(async (req, res, next) => {
   const task = await Task.findOne({ _id: taskID });
 
   if (!task) {
-   
-    return res.status(404).json({ msg: `No task with id : ${taskID}` });
+    return next(createCustomError(`No task with id : ${taskID}`, 404));
+    // return res.status(404).json({ msg: `No task with id : ${taskID}` });
   }
   res.status(200).json({ tasks: task });
   // } catch (error) {
@@ -40,7 +40,9 @@ const deleteTask = asyncWrapper(async (req, res) => {
 
   // if the Unique ID is not the same
   if (!task) {
-    return res.status(404).json({ msg: `No task with id : ${taskID}` });
+    return next(createCustomError(`No task with id : ${taskID}`, 404));
+
+    // return res.status(404).json({ msg: `No task with id : ${taskID}` });
   }
   res.status(200).json({ deleteTask: task });
   // } catch (error) {
