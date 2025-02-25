@@ -1,4 +1,5 @@
-require("dotenv").config();
+// require("express").config();
+
 // async errors
 
 const express = require("express");
@@ -6,8 +7,6 @@ const app = express();
 
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error-handler");
-// const { connect } = require("mongoose");
-const connectDB = require("./db/connect");
 
 // middleware
 app.use(express.json());
@@ -21,23 +20,16 @@ app.get("/", (req, res) => {
   );
 });
 
-app.use("/api/v1/products");
+const port = 3000;
 
-// products route
-
-// listening Port
-const port = process.env.PORT || 3000;
-
-const start = async () => {
+const startServer = async () => {
   try {
-    // connectDB
-    await connectDB(process.env.MONGO_URI);
     app.listen(port, () => {
-      return console.log(`Sever is listening on ${port}...`);
+      console.log(`Server is listening on port ${port}...`);
     });
   } catch (error) {
     console.log(error);
   }
 };
 
-start();
+startServer();
