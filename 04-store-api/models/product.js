@@ -1,13 +1,16 @@
-const getAllProductStatic = async (req, res) => {
+const getAllProductsStatic = async (req, res) => {
   res.status(200).json({
     msg: "products testing route",
   });
 };
 
 
-const getAllProductStatic = async (req, res) => {
+const getAllProducts = async (req, res) => {
     res.status(200).json({
-      msg: "products testing route",
+      msg: "products route",
     });
   };
   
+module.exports = {
+  getAllProductsStatic, getAllProducts
+}
