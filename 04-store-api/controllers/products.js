@@ -12,5 +12,5 @@ const getAllProductsStatic = async (req, res) => {
     };
     
   module.exports = {
-    getAllProductsStatic, getAllProducts
+    getAllProductsStatic, getAllProducts,
   }
