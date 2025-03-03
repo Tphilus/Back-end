@@ -1,6 +1,5 @@
 require("dotenv").config();
-
-// async errors
+// require('express-async-errors')
 
 const express = require("express");
 const app = express();
@@ -20,7 +19,7 @@ app.get("/", (req, res) => {
   );
 });
 
-app.use("/app/v1/products", productsRouter);
+app.use("/api/v1/products", productsRouter);
 
 // products route
 
