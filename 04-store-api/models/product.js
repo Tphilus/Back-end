@@ -24,11 +24,11 @@ const productSchema = new mongoose.Schema({
   company: {
     type: String,
     enum: {
-       value: ['Ikea', 'liddy', 'caressa', 'marcos'],
-       message: '{VALUE} is not '
-    }
+      value: ["Ikea", "liddy", "caressa", "marcos"],
+      message: "{VALUE} is not ",
+    },
     // enum: ['Ikea', 'liddy', 'caressa', 'marcos'],
   },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model("Product", productSchema);
