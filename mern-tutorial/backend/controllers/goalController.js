@@ -6,7 +6,7 @@ const Goal = require("../models/goalModel");
 // @access Private
 
 const getGoals = asyncHandler(async (req, res) => {
-  const goals = await Goal.find();
+  const goals = await Goal.find({ user: req.user.id });
 
   res.status(200).send({ goals: goals });
 });
@@ -25,6 +25,7 @@ const setGoal = asyncHandler(async (req, res) => {
 
   const goal = await Goal.create({
     text: req.body.text,
+    user: req.user.id,
   });
 
   res.status(201).json(goal);
@@ -39,8 +40,22 @@ const updateGoal = asyncHandler(async (req, res) => {
   const goal = await Goal.findById(_id);
 
   if (!goal) {
-    res.status(400);
+    res.status(404);
     throw new Error("Goal not found");
+  }
+
+  const user = await UserActivation.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("USer not found");
+  }
+
+  // Make sure the logged in user matches the goal user
+  if (goal.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("USer not authorize");
   }
 
   const updatedGoal = await Goal.findByIdAndUpdate(_id, req.body, {
@@ -54,7 +69,7 @@ const updateGoal = asyncHandler(async (req, res) => {
 // @access Private
 
 const deleteGoal = asyncHandler(async (req, res) => {
-  // WE CAN USE THIS 
+  // WE CAN USE THIS
   // _id = req.params.id;
   // const goal = await Goal.findById(_id);
 
@@ -65,7 +80,7 @@ const deleteGoal = asyncHandler(async (req, res) => {
 
   // await Goal.remove()
 
-  // OR THIS ONE 
+  // OR THIS ONE
   _id = req.params.id;
 
   const deleteGoal = await Goal.findByIdAndDelete(_id);
@@ -73,6 +88,19 @@ const deleteGoal = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Id Not found");
   }
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("USer not found");
+  }
+
+  // Make sure the logged in user matches the goal user
+  if (goal.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("USer not authorize");
+  }
+
   res.status(200).json(deleteGoal);
 });
 
