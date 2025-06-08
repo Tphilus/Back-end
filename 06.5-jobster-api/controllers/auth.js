@@ -43,6 +43,10 @@ const login = async (req, res) => {
   });
 };
 
+const updateUser = async(req,res) => {
+  res.send('jsjsj')
+}
+
 module.exports = {
   register,
   login,
