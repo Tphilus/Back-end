@@ -15,9 +15,9 @@ const auth = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     // attach the user to the job routes
 
-    const user = User.findById(payload.id).selected('-password')
-    req.body = user ;
-    // req.user = { userId: payload.userId, name: payload.name };
+    // const user = User.findById(payload.id).selected("-password");
+    // req.body = user;
+    req.user = { userId: payload.userId, name: payload.name };
     next();
   } catch (error) {
     throw new UnauthenticatedError("Authentication invlid");
