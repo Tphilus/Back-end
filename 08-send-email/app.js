@@ -3,6 +3,7 @@ require('express-async-errors');
 
 const express = require('express');
 const app = express();
+const sedEmail = require('./controllers/sendEmail')
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
@@ -12,8 +13,10 @@ app.use(express.json());
 
 // routes
 app.get('/', (req, res) => {
-  res.send('<h1>Email Project</h1>');
+  res.send('<h1>Email Project</h1> <a href="/send">send email</a>');
 });
+
+app.use('/send', sedEmail )
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
