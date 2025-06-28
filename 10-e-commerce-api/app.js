@@ -3,6 +3,7 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 const authRouter = require("./routes/authRoutes");
+const cookieParser = require("cookie-parser");
 
 // rest of the package
 const morgan = require("morgan");
@@ -16,6 +17,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 
 app.use(morgan("tiny"));
 app.use(express.json()); // To see the json files
+app.use(cookieParser())
 app.get("/", (req, res) => {
   res.send("E-commerce api");
 });
