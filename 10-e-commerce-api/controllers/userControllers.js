@@ -1,15 +1,26 @@
+const User = require("../model/User");
+const CustomError = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 
 const getAllUsers = async (req, res) => {
-  res.status(StatusCodes.OK).send("Get All Users");
+  // console.log(req.user);
+
+  const users = await User.find({ role: "user" }).select("-password");
+  res.status(StatusCodes.OK).json({ users, count: users.length });
 };
 
 const getSingleUser = async (req, res) => {
-  res.status(StatusCodes.OK).send("Get A Single User");
+  const user = await User.findOne({ _id: req.params.id }).select("-password");
+
+  if (!user) {
+    throw new CustomError.NotFoundError(`No user with id : ${req.params.id}`);
+  }
+
+  res.status(StatusCodes.OK).json({ user });
 };
 
 const showCurrentUser = async (req, res) => {
-  res.status(StatusCodes.OK).send("Show Current Users");
+  res.status(StatusCodes.OK).json("Show Current Users");
 };
 
 const updateUser = async (req, res) => {
