@@ -1,0 +1,51 @@
+{
+  "name": "typescript-rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.6",
+    "@types/config": "^3.3.5",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/lodash": "^4.17.20",
+    "@types/nanoid": "^3.0.0",
+    "@types/node": "^24.0.11",
+    "@types/pino": "^7.0.5",
+    "add": "^2.0.6",
+    "dotenv": "^17.1.0",
+    "eslint": "^9.30.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
+    "yarn": "^1.22.22"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "config": "^4.0.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.16.2",
+    "nanoid": "^5.1.5",
+    "pino": "^9.7.0",
+    "pino-pretty": "^13.0.0",
+    "zod": "^3.25.76"
+  }
+}

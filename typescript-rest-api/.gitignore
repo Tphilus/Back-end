@@ -1,0 +1,49 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Output
+dist/
+build/
+
+# TypeScript
+*.tsbuildinfo
+
+# Env Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS/System
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Coverage / Testing
+coverage/
+.nyc_output/
+
+# PM2 process file
+pids/
+*.pid
+*.seed
+
+# Database local files (if any)
+*.sqlite
+*.db
+
+# TS config overrides
+tsconfig.tsbuildinfo
