@@ -1,11 +1,10 @@
 import { Request, Response, Router } from "express";
+import { listProducts } from "./productContollers";
 
 // Router
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  res.send("The list of projects");
-});
+router.get("/", listProducts);
 
 router.get("/:id", (req: Request, res: Response) => {
   console.log(req.params);
