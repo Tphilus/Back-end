@@ -6,9 +6,17 @@ export function listProducts(req: Request, res: Response) {
 
 export function getProductById(req: Request, res: Response) {
   console.log(req.params);
-  res.send("");
+  res.send("get product by ID");
 }
 
 export function createProduct(req: Request, res: Response) {
-  res.send("");
+  res.send("create product");
+}
+
+export function updateProduct(req: Request, res: Response) {
+  res.send("update product");
+}
+
+export function deleteProduct(req: Request, res: Response) {
+  res.send("delete product");
 }
