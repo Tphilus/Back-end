@@ -6,7 +6,7 @@ import { productsTable } from "../../db/productSchema";
 export async function listProducts(req: Request, res: Response) {
   try {
     const products = await db.select().from(productsTable);
-    res.status(200).json({ date: products });
+    res.status(200).json({ data: products });
   } catch (e) {
     res.status(500).send(e);
   }
@@ -37,6 +37,8 @@ export async function getProductById(req: Request, res: Response) {
 
 export async function createProduct(req: Request, res: Response) {
   try {
+    console.log(req.userId);
+
     const [product] = await db
       .insert(productsTable)
       .values(req.cleanBody)

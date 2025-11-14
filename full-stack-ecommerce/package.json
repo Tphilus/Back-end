@@ -17,17 +17,21 @@
   "license": "ISC",
   "packageManager": "pnpm@10.18.3",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "dotenv-cli": "^11.0.0",
     "drizzle-orm": "^0.44.7",
     "drizzle-zod": "^0.8.3",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "pg": "^8.16.3",
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/lodash": "^4.17.20",
     "@types/pg": "^8.15.6",
     "drizzle-kit": "^0.31.6",

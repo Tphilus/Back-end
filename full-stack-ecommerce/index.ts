@@ -1,4 +1,5 @@
 import express, { json, Request, Response, urlencoded } from "express";
+import authRoutes from "./routes/auth";
 import productRouter from "./routes/products";
 
 const port = 8000;
@@ -13,6 +14,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/products", productRouter);
+app.use("/auth", authRoutes);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
