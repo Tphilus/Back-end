@@ -3,7 +3,7 @@ import {
   createProductSchema,
   updateProductSchema,
 } from "../../db/productSchema";
-import { verifyToken } from "../../middleware/authMiddleware";
+import { verifySeller, verifyToken } from "../../middleware/authMiddleware";
 import { validateData } from "../../middleware/validationMiddleware";
 import {
   createProduct,
@@ -20,15 +20,22 @@ router.get("/", listProducts);
 
 router.get("/:id", getProductById);
 
-router.post("/", verifyToken, validateData(createProductSchema), createProduct);
+router.post(
+  "/",
+  verifyToken,
+  verifySeller,
+  validateData(createProductSchema),
+  createProduct
+);
 
 router.put(
   "/:id",
   verifyToken,
+  verifySeller,
   validateData(updateProductSchema),
   updateProduct
 );
 
-router.delete("/:id", deleteProduct);
+router.delete("/:id", verifyToken, verifySeller, deleteProduct);
 
 export default router;
