@@ -1,16 +1,28 @@
 // create our first https server
-import express, { Request, Response } from "express";
+import dotenv from "dotenv";
+import express from "express";
+import swaggerUI from "swagger-ui-express";
+import { connectDB } from "./config/database";
+import swaggerSpec from "./config/swagger";
+import authRoutes from "./routes/authRoutes";
 
+dotenv.config();
 const app = express();
 
 const PORT = 3000;
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ message: "Hello World!" });
-});
+// middleware
+app.use(express.json()); // to parse JSON bodies
+
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port at http://localhost:${PORT}`);
+});
+
+connectDB().catch((err) => {
+  console.log(err);
 });
 
 // Model:
