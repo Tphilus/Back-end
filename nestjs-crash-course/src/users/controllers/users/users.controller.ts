@@ -1,10 +1,18 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/CreateUser.dto';
 
 @Controller('users')
 export class UsersController {
   @Get()
-  getUsers() {
+  getUsers(@Query('sortDec') sortDec: boolean ) {
     return { username: 'Anson', email: 'answer@gmail.com' };
   }
 
@@ -15,7 +23,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  getUserById(@Param('id') id: string) {
+  getUserById(@Param('id', ParseIntPipe) id: number) {
     return { id };
   }
 }
