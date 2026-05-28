@@ -4,6 +4,12 @@ from pydantic import BaseModel
 from typing import Optional
 from random import randrange
 
+# For Postgres connections 
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import time
+# End of Postgres Connections 
+
 app = FastAPI()
 
 class Post(BaseModel):
@@ -11,6 +17,16 @@ class Post(BaseModel):
     content: str
     published: bool = True
     rating: Optional[int] = None
+
+# Postgres Connection 
+try:
+    conn = psycopg2.connect()
+    cursor = conn.cursor()
+    print("Database connection was succesfull!")
+except Exception as error:
+    print("Connecting to database failed")
+    print("Error: ", error)
+    # time.sleep(2)
 
 my_posts = [
     {"title": "Title of post 1", "content": "content of post 1", "id": 1},
@@ -34,20 +50,29 @@ def root():
 
 @app.get("/posts")
 def get_posts():
-    return {"data": my_posts}
-
+    cursor.execute(""" SELECT * FROM posts """)
+    posts = cursor.fetchall()
+    return {"data": posts}
+ 
 @app.post("/posts")
 def create_post(post: Post): 
-    post_dict = post.dict()
-    post_dict["id"] = randrange(0, 1000000)
-    my_posts.append(post_dict)
-    return {"data": post_dict}
+    # post_dict = post.dict()
+    # post_dict["id"] = randrange(0, 1000000)
+    # my_posts.append(post_dict)
+    cursor.execute("""INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * """, (post.title, post.content, post.published) )
+    
+    new_post = cursor.fetchone()
+    conn.commit()
+    return {"data": new_post}
 
 @app.get("/posts/{id}")
 def get_post(id: int, response: Response):
-    post = find_post(id)
+    cursor.execute(""" SELECT * FROM posts WHERE id = %s """, (str(id)))
+    post = cursor.fetchone()
+    # post = find_post(id)
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} was not found")
+    return {"post_detail": post}
 
 @app.delete("/posts/{id}")
 def delete_post(id: int):
