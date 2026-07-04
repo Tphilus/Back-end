@@ -1,0 +1,3 @@
+[submodule "nest-project"]
+	path = nest-project
+	url = https://github.com/nestjs/nest-project.git
